@@ -1,0 +1,12 @@
+{
+  "name": "com.jardybio.com",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "pnpm --parallel --filter 'com.jardybio.*' run dev"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
