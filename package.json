@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "pnpm --parallel --filter 'com.jardybio.*' run dev"
+    "start": "pnpm --parallel --filter 'com.jardybio.*' run dev",
+    "clean": "rm -rf node_modules apps/*/node_modules"
   },
   "keywords": [],
   "author": "",

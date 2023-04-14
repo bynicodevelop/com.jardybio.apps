@@ -25,3 +25,6 @@ Route.get('/', async () => {
 })
 
 Route.resource('contents', 'ContentsController').only(['index'])
+
+Route.post('login', 'AuthController.login')
+Route.post('create-account', 'AuthController.createAccount')

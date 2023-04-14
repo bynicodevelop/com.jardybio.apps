@@ -1,0 +1,1 @@
+export { getMessage, messages } from './src/messages';

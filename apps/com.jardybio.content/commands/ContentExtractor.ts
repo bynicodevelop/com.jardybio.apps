@@ -3,7 +3,10 @@ import UrlExtract from 'App/Models/UrlExtract'
 import axios from 'axios'
 import { load } from 'cheerio'
 
-import { args, BaseCommand } from '@adonisjs/core/build/standalone'
+import {
+  args,
+  BaseCommand,
+} from '@adonisjs/core/build/standalone'
 
 interface IArticle {
   title: string
@@ -108,4 +111,5 @@ export default class ContentExtractor extends BaseCommand {
       this.logger.info(`Extracted content from ${url.url}`)
     }
   }
+}
 }

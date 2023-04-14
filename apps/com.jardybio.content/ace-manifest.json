@@ -8,7 +8,54 @@
       "commandPath": "./commands/ContentExtractor",
       "commandName": "content:extractor",
       "description": "",
+      "args": [
+        {
+          "type": "string",
+          "propertyName": "max",
+          "name": "max",
+          "required": true,
+          "description": "Nombre de la url a extraire"
+        }
+      ],
+      "aliases": [],
+      "flags": []
+    },
+    "create:article": {
+      "settings": {
+        "loadApp": true,
+        "stayAlive": false
+      },
+      "commandPath": "./commands/CreateArticle",
+      "commandName": "create:article",
+      "description": "",
       "args": [],
+      "aliases": [],
+      "flags": []
+    },
+    "create:product": {
+      "settings": {
+        "loadApp": true,
+        "stayAlive": false
+      },
+      "commandPath": "./commands/CreateProduct",
+      "commandName": "create:product",
+      "description": "",
+      "args": [
+        {
+          "type": "string",
+          "propertyName": "name",
+          "name": "name",
+          "required": true,
+          "description": "The name of the product"
+        },
+        {
+          "type": "string",
+          "propertyName": "description",
+          "name": "description",
+          "required": true,
+          "description": "The description of the product"
+        }
+      ],
       "aliases": [],
       "flags": []
     },
