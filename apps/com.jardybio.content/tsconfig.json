@@ -11,20 +11,6 @@
   "compilerOptions": {
     "outDir": "build",
     "sourceMap": true,
-    "paths": {
-      "App/*": [
-        "./app/*"
-      ],
-      "Config/*": [
-        "./config/*"
-      ],
-      "Contracts/*": [
-        "./contracts/*"
-      ],
-      "Database/*": [
-        "./database/*"
-      ]
-    },
     "types": [
       "@adonisjs/core",
       "@adonisjs/repl",

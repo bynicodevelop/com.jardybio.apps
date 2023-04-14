@@ -121,9 +121,6 @@ importers:
       '@angular/router':
         specifier: ^15.1.0
         version: 15.2.7(@angular/common@15.2.7)(@angular/core@15.2.7)(@angular/platform-browser@15.2.7)(rxjs@7.8.0)
-      '@auth0/angular-jwt':
-        specifier: ^5.1.2
-        version: 5.1.2(@angular/common@15.2.7)
       '@ngrx/component':
         specifier: ^15.4.0
         version: 15.4.0(@angular/common@15.2.7)(@angular/core@15.2.7)(rxjs@7.8.0)
@@ -962,15 +959,6 @@ packages:
   /@assemblyscript/loader@0.10.1:
     resolution: {integrity: sha512-H71nDOOL8Y7kWRLqf6Sums+01Q5msqBW2KhDUTemh1tvY04eSkSXrK0uj/4mmY0Xr16/3zyZmsrxN7CKuRbNRg==}
     dev: true
-
-  /@auth0/angular-jwt@5.1.2(@angular/common@15.2.7):
-    resolution: {integrity: sha512-8ulz24cPpEkZb9/AdAaWfYIkomQDbZqvB9LproF/48Klnr30EJx09AYF9sbKTN4qLSgIZSlCb/Y7XQJZ51vSzA==}
-    peerDependencies:
-      '@angular/common': '>=12.0.0'
-    dependencies:
-      '@angular/common': 15.2.7(@angular/core@15.2.7)(rxjs@7.8.0)
-      tslib: 2.5.0
-    dev: false
 
   /@babel/code-frame@7.21.4:
     resolution: {integrity: sha512-LYvhNKfwWSPpocw8GI7gpK2nq3HSDuEPC/uSYaALSJu9xjsalaaYFOq0Pwt5KmVqwEbZlDu81aLXwBOmD/Fv9g==}

@@ -23,9 +23,7 @@ export class AuthEffects {
       ofType(auth),
       mergeMap((action) =>
         this.authService.auth(action.credentials).pipe(
-          map((response: Object) =>
-            authSuccess({ token: (response as IToken)?.token })
-          ),
+          map((response: Object) => authSuccess({ token: response as IToken })),
           catchError((errorResponse: HttpErrorResponse) => {
             return of(authFailure({ errors: errorResponse.error.errors }));
           })
@@ -39,7 +37,7 @@ export class AuthEffects {
       this.actions$.pipe(
         ofType(authSuccess),
         tap((action): void => {
-          localStorage.setItem('access_token', action.token);
+          localStorage.setItem('access_token', JSON.stringify(action.token));
         })
       ),
     { dispatch: false }

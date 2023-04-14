@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { IAuth } from '@packages/interfaces';
+import { IAuth, IToken } from '@packages/interfaces';
 
 export const auth = createAction(
   '[Auth] Auth',
@@ -8,7 +8,7 @@ export const auth = createAction(
 
 export const authSuccess = createAction(
   '[Auth] Auth Success',
-  props<{ token: string }>()
+  props<{ token: IToken }>()
 );
 
 export const authFailure = createAction(

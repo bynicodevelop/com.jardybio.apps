@@ -3,22 +3,22 @@ import { Injectable } from '@angular/core';
 
 import { Observable } from 'rxjs';
 
-import { JwtHelperService } from '@auth0/angular-jwt';
-import { IAuth } from '@packages/interfaces';
+import { IAuth, IToken } from '@packages/interfaces';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  constructor(
-    private httpClient: HttpClient,
-    private jwtHelper: JwtHelperService
-  ) {}
+  constructor(private httpClient: HttpClient) {}
 
   isAuthenticated(): boolean {
-    const token = localStorage.getItem('access_token');
+    const token = this.getToken();
 
-    return !this.jwtHelper.isTokenExpired(token);
+    return !!token.token && new Date() < new Date(token.expires_at);
+  }
+
+  getToken(): IToken {
+    return JSON.parse(localStorage.getItem('access_token') || '{}') as IToken;
   }
 
   auth(credentials: IAuth): Observable<Object> {

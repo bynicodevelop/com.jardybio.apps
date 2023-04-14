@@ -22,6 +22,18 @@
     "paths": {
       "@packages/interfaces": ["packages/interfaces/index.ts"],
       "@packages/messages": ["packages/messages/index.ts"],
+      "App/*": [
+        "apps/com.jardybio.content/app/*"
+      ],
+      "Config/*": [
+        "apps/com.jardybio.content/config/*"
+      ],
+      "Contracts/*": [
+        "apps/com.jardybio.content/contracts/*"
+      ],
+      "Database/*": [
+        "apps/com.jardybio.content/database/*"
+      ]
     }
   },
   "exclude": ["node_modules", "dist"]

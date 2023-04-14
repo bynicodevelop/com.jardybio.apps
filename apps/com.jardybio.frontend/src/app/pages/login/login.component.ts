@@ -1,11 +1,12 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { Router } from '@angular/router';
 
 import { AuthFacade } from '../../store/auth/auth.facade.service';
 
@@ -16,19 +17,33 @@ import { AuthFacade } from '../../store/auth/auth.facade.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   protected loginForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private authFacade: AuthFacade) {
+  private authenticationState$ = this.authFacade.authenticationState$;
+
+  constructor(
+    private fb: FormBuilder,
+    private authFacade: AuthFacade,
+    private route: Router
+  ) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
     });
   }
 
+  ngOnInit(): void {
+    this.authenticationState$.subscribe((state) => {
+      console.log('state', state);
+      if (state) {
+        this.route.navigate(['/']);
+      }
+    });
+  }
+
   protected onSubmit(): void {
     if (this.loginForm.valid) {
-      // Récupération des valeurs du formulaire
       const login = this.loginForm.get('email')?.value;
       const password = this.loginForm.get('password')?.value;
 
