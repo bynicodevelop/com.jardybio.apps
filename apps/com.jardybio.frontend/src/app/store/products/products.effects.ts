@@ -9,6 +9,8 @@ import { ProductService } from '../../services/product/product.service';
 import {
   createProduct,
   createProductSuccess,
+  deleteProduct,
+  deleteProductSuccess,
   loadProducts,
   loadProductsSuccess,
 } from './products.actions';
@@ -48,5 +50,35 @@ export class ProductsEffects {
         );
       })
     )
+  );
+
+  deleteProduct$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(deleteProduct),
+      switchMap((action) => {
+        return this.productService.deleteProduct(action.product).pipe(
+          map(() => {
+            return deleteProductSuccess();
+          })
+        );
+      })
+    )
+  );
+
+  deleteProductSuccess$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(deleteProductSuccess),
+        switchMap(() => {
+          return this.productService.loadProducts().pipe(
+            map((products: Object) =>
+              loadProductsSuccess({
+                products: products as ProductEntity[],
+              })
+            )
+          );
+        })
+      ),
+    { dispatch: false }
   );
 }

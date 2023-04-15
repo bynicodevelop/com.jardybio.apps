@@ -23,7 +23,7 @@ const routes: Routes = [
     ],
     children: [
       {
-        path: '',
+        path: 'products',
         component: AllProductComponent,
       },
       {

@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 
-import { IProduct } from 'packages/interfaces/src/product';
+import { IProduct, ProductEntity } from 'packages/interfaces/src/product';
 
 import { Store } from '@ngrx/store';
 
-import { createProduct, loadProducts } from './products.actions';
+import { createProduct, deleteProduct, loadProducts } from './products.actions';
 import { selectAllProducts } from './products.selectors';
 
 @Injectable({
@@ -21,5 +21,9 @@ export class ProductsFacade {
 
   createProduct(product: IProduct): void {
     this.store.dispatch(createProduct({ product }));
+  }
+
+  deleteProduct(product: ProductEntity): void {
+    this.store.dispatch(deleteProduct({ product }));
   }
 }

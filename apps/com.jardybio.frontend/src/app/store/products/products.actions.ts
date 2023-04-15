@@ -19,3 +19,12 @@ export const createProductSuccess = createAction(
   '[Products] Create Product Success',
   props<{ product: ProductEntity }>()
 );
+
+export const deleteProduct = createAction(
+  '[Products] Delete Product',
+  props<{ product: ProductEntity }>()
+);
+
+export const deleteProductSuccess = createAction(
+  '[Products] Delete Product Success'
+);
