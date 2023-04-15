@@ -1,5 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { catchError, map, mergeMap, of, tap } from 'rxjs';
 
@@ -8,14 +9,21 @@ import { IToken } from '@packages/interfaces';
 
 import { AuthService } from '../../services/auth/auth.service';
 import { NotificationFacade } from '../notification/notification.facade.service';
-import { auth, authFailure, authSuccess } from './auth.actions';
+import {
+  auth,
+  authFailure,
+  authSuccess,
+  logout,
+  logoutSuccess,
+} from './auth.actions';
 
 @Injectable()
 export class AuthEffects {
   constructor(
     private actions$: Actions,
     private authService: AuthService,
-    private notificationFacade: NotificationFacade
+    private notificationFacade: NotificationFacade,
+    private router: Router
   ) {}
 
   auth$ = createEffect(() =>
@@ -50,6 +58,26 @@ export class AuthEffects {
         tap((action): void => {
           this.notificationFacade.createNotification(action.errors);
         })
+      ),
+    { dispatch: false }
+  );
+
+  logout$ = createEffect((): any =>
+    this.actions$.pipe(
+      ofType(logout),
+      map(() => {
+        localStorage.removeItem('access_token');
+
+        return logoutSuccess();
+      })
+    )
+  );
+
+  logoutSuccess$ = createEffect(
+    (): any =>
+      this.actions$.pipe(
+        ofType(logoutSuccess),
+        tap(() => this.router.navigate(['/auth/login']))
       ),
     { dispatch: false }
   );

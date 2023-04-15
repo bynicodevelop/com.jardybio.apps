@@ -7,10 +7,6 @@ export const selectLoaderState =
 
 export const isAuthenticated = createSelector(
   selectLoaderState,
-  (state: StateAuth): boolean => {
-    console.log(state.token);
-    return (
-      !!state.token?.token && new Date() < new Date(state.token.expires_at)
-    );
-  }
+  (state: StateAuth): boolean =>
+    !!state.token?.token && new Date() < new Date(state.token.expires_at)
 );

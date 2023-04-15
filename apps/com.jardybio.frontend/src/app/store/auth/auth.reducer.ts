@@ -1,7 +1,13 @@
 import { createReducer, on } from '@ngrx/store';
 import { IAuth } from '@packages/interfaces';
 
-import { auth, authFailure, authSuccess } from './auth.actions';
+import {
+  auth,
+  authFailure,
+  authSuccess,
+  logout,
+  logoutSuccess,
+} from './auth.actions';
 
 export const authFeatureKey = 'auth';
 
@@ -30,5 +36,12 @@ export const reducer = createReducer(
       token,
     };
   }),
-  on(authFailure, (state): IAuth => state)
+  on(authFailure, (state): IAuth => state),
+  on(logout, (state): IAuth => state),
+  on(logoutSuccess, (state): IAuth => {
+    return {
+      ...state,
+      token: undefined,
+    };
+  })
 );

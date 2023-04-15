@@ -35,7 +35,6 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.authenticationState$.subscribe((state) => {
-      console.log('state', state);
       if (state) {
         this.route.navigate(['/']);
       }

@@ -29,8 +29,6 @@ export class CreateProductComponent {
 
   onSubmit(): void {
     if (this.createForm.valid) {
-      console.log('Formulaire soumis:', this.createForm.value);
-
       this.productsFacade.createProduct(this.createForm.value);
     }
   }

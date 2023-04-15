@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 
 import { Store } from '@ngrx/store';
-import { IAuth } from '@packages/interfaces';
+import { IAuth, IToken } from '@packages/interfaces';
 
-import { auth } from './auth.actions';
+import { auth, authSuccess, logout } from './auth.actions';
 import { isAuthenticated } from './auth.selectors';
 
 @Injectable({
@@ -16,5 +16,13 @@ export class AuthFacade {
 
   auth(credentials: IAuth): void {
     this.store.dispatch(auth({ credentials }));
+  }
+
+  setToken(token: IToken): void {
+    this.store.dispatch(authSuccess({ token }));
+  }
+
+  logout(): void {
+    this.store.dispatch(logout());
   }
 }

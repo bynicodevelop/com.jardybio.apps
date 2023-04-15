@@ -5,16 +5,25 @@ import { Observable } from 'rxjs';
 
 import { IAuth, IToken } from '@packages/interfaces';
 
+import { AuthFacade } from '../../store/auth/auth.facade.service';
+
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  constructor(private httpClient: HttpClient) {}
+  constructor(private httpClient: HttpClient, private authFacade: AuthFacade) {}
 
   isAuthenticated(): boolean {
     const token = this.getToken();
 
-    return !!token.token && new Date() < new Date(token.expires_at);
+    const isAuthenticated =
+      !!token.token && new Date() < new Date(token.expires_at);
+
+    if (isAuthenticated) {
+      this.authFacade.setToken(token);
+    }
+
+    return isAuthenticated;
   }
 
   getToken(): IToken {

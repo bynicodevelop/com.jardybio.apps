@@ -25,12 +25,11 @@ export class ProductsEffects {
       ofType(loadProducts),
       switchMap(() => {
         return this.productService.loadProducts().pipe(
-          map((products: Object) => {
-            console.log(products);
-            return loadProductsSuccess({
+          map((products: Object) =>
+            loadProductsSuccess({
               products: products as ProductEntity[],
-            });
-          })
+            })
+          )
         );
       })
     )
