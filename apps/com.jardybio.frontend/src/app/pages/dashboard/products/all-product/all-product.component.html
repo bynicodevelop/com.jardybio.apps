@@ -9,11 +9,11 @@
     </button>
   </div>
 
-  <div *ngIf="products.length === 0" class="text-center my-8">
+  <div *ngIf="(products$ | ngrxPush)?.length === 0" class="text-center my-8">
     <p>Aucun produit disponible.</p>
   </div>
 
-  <div *ngIf="products.length > 0">
+  <div *ngIf="(products$ | ngrxPush)?.length">
     <table class="w-full table-auto">
       <thead>
         <tr>
@@ -22,7 +22,10 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let product of products" class="bg-white border">
+        <tr
+          *ngFor="let product of products$ | ngrxPush"
+          class="bg-white border"
+        >
           <td class="px-4 py-2">{{ product.name }}</td>
           <td class="px-4 py-2 flex justify-end space-x-3">
             <button

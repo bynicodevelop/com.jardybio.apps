@@ -2,7 +2,12 @@ import { createEntityAdapter, EntityState } from '@ngrx/entity';
 import { createReducer, on } from '@ngrx/store';
 import { ProductEntity } from '@packages/interfaces';
 
-import { createProduct, createProductSuccess } from './products.actions';
+import {
+  createProduct,
+  createProductSuccess,
+  loadProducts,
+  loadProductsSuccess,
+} from './products.actions';
 
 export const productsFeatureKey = 'products';
 
@@ -16,6 +21,12 @@ export const initialState: StateProduct = productAdapter.getInitialState();
 
 export const reducer = createReducer(
   initialState,
+  on(loadProducts, (state: StateProduct): StateProduct => state),
+  on(
+    loadProductsSuccess,
+    (state: StateProduct, { products }): StateProduct =>
+      productAdapter.setAll(products, state)
+  ),
   on(createProduct, (state: StateProduct): StateProduct => state),
   on(
     createProductSuccess,

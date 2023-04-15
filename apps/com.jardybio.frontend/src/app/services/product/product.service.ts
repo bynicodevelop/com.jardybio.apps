@@ -10,6 +10,10 @@ import { Observable } from 'rxjs';
 export class ProductService {
   constructor(private readonly http: HttpClient) {}
 
+  loadProducts(): Observable<Object> {
+    return this.http.get('/products');
+  }
+
   createProduct(product: IProduct): Observable<Object> {
     return this.http.post('/products', product);
   }
