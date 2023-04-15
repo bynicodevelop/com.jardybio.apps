@@ -10,12 +10,15 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NotificationComponent } from './components/overlay/notification/notification.component';
 import { DomainInterceptor } from './http-interceptor';
+import { AllProductComponent } from './pages/dashboard/products/all-product/all-product.component';
 import { AuthEffects } from './store/auth/auth.effects';
 import * as fromAuth from './store/auth/auth.reducer';
 import * as fromNotification from './store/notification/notification.reducer';
+import { ProductsEffects } from './store/products/products.effects';
+import * as fromProducts from './store/products/products.reducer';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, AllProductComponent],
   imports: [
     BrowserModule,
     HttpClientModule,
@@ -24,11 +27,12 @@ import * as fromNotification from './store/notification/notification.reducer';
     StoreModule.forRoot(
       {
         [fromAuth.authFeatureKey]: fromAuth.reducer,
+        [fromProducts.productsFeatureKey]: fromProducts.reducer,
         [fromNotification.notificationFeatureKey]: fromNotification.reducer,
       },
       {}
     ),
-    EffectsModule.forRoot([AuthEffects]),
+    EffectsModule.forRoot([AuthEffects, ProductsEffects]),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
   ],
   providers: [
