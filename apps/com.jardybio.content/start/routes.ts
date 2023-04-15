@@ -18,6 +18,8 @@
 |
 */
 
+import ProductsController from 'App/Controllers/Http/ProductsController'
+
 import Route from '@ioc:Adonis/Core/Route'
 
 Route.get('/', async () => {
@@ -28,3 +30,5 @@ Route.resource('contents', 'ContentsController').only(['index'])
 
 Route.post('login', 'AuthController.login')
 Route.post('create-account', 'AuthController.createAccount')
+
+Route.resource('products', ProductsController.name).apiOnly()

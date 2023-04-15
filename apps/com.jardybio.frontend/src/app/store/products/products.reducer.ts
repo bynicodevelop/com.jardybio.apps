@@ -9,7 +9,7 @@ export const productsFeatureKey = 'products';
 export type StateProduct = EntityState<ProductEntity>;
 
 export const productAdapter = createEntityAdapter<ProductEntity>({
-  selectId: (product: ProductEntity): string => product.uid,
+  selectId: (product: ProductEntity): number => product.id,
 });
 
 export const initialState: StateProduct = productAdapter.getInitialState();

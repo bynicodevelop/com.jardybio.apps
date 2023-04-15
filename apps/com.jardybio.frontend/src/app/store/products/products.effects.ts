@@ -20,8 +20,10 @@ export class ProductsEffects {
       ofType(createProduct),
       switchMap((action) => {
         return this.productService.createProduct(action.product).pipe(
-          map((createdProduct: ProductEntity) => {
-            return createProductSuccess({ product: createdProduct });
+          map((createdProduct: Object) => {
+            return createProductSuccess({
+              product: createdProduct as ProductEntity,
+            });
           })
         );
       })

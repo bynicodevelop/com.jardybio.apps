@@ -1,17 +1,16 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 import { IProduct } from 'packages/interfaces/src/product';
-import { Observable, of } from 'rxjs';
-
-import { ProductEntity } from '@packages/interfaces';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ProductService {
-  constructor() {}
+  constructor(private readonly http: HttpClient) {}
 
-  createProduct(product: IProduct): Observable<ProductEntity> {
-    return of({ ...product, uid: '1234' });
+  createProduct(product: IProduct): Observable<Object> {
+    return this.http.post('/products', product);
   }
 }

@@ -1,19 +1,17 @@
 import { DateTime } from 'luxon'
 
-import {
-  BaseModel,
-  column,
-} from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, column } from '@ioc:Adonis/Lucid/Orm'
+import { ProductEntity } from '@packages/interfaces'
 
-export default class Product extends BaseModel {
+export default class Product extends BaseModel implements ProductEntity {
   @column({ isPrimary: true })
-  public id: number
+  public id!: number
 
   @column()
-  public name: string
+  public name!: string
 
   @column()
-  public description: string
+  public description!: string
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime

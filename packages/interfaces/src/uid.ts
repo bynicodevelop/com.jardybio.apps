@@ -1,3 +1,3 @@
 export interface IUid {
-    uid: string;
+    id: number;
 }
