@@ -14,8 +14,8 @@ import { getNotification } from './notification.selectors';
 export class NotificationFacade {
   constructor(private storeNotification: Store) {}
 
-  createNotification(messages: string[]): void {
-    this.storeNotification.dispatch(createNotification({ messages }));
+  createNotification(messages: string[]) {
+    return this.storeNotification.dispatch(createNotification({ messages }));
   }
 
   deleteNotification(): void {
