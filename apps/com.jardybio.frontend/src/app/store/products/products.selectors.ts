@@ -17,9 +17,8 @@ export const selectAllProducts = createSelector(
   (state: StateProduct): ProductEntity[] => selectAll(state)
 );
 
-export const selectProductById = (id: number) =>
-  createSelector(
-    selectProductState,
-    (state: StateProduct): ProductEntity | undefined =>
-      selectAll(state).find((p) => p.id === id)
-  );
+export const selectProductSelected = createSelector(
+  selectProductState,
+  (state: StateProduct): ProductEntity | undefined =>
+    selectAll(state).find((p): boolean => p.selected || false)
+);

@@ -25,7 +25,9 @@ export const reducer = createReducer(
   initialState,
   on(loadProducts, (state: StateProduct): StateProduct => state),
   on(getProduct, (state: StateProduct): StateProduct => state),
-  on(getProductSuccess, (state: StateProduct): StateProduct => state),
+  on(getProductSuccess, (state: StateProduct, { product }): StateProduct => {
+    return productAdapter.upsertOne(product, state);
+  }),
   on(
     loadProductsSuccess,
     (state: StateProduct, { products }): StateProduct =>

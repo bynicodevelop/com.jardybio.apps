@@ -1,18 +1,20 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgFor } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { ProductsFacade } from 'apps/com.jardybio.frontend/src/app/store/products/products.facade.service';
 
+import { LetModule, PushModule } from '@ngrx/component';
+
 @Component({
   selector: 'app-editor',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, PushModule, NgFor, LetModule],
   templateUrl: './editor.component.html',
   styleUrls: ['./editor.component.scss'],
 })
 export class EditorComponent implements OnInit {
-  protected product$ = this.productsFacade.products$;
+  protected product$ = this.productsFacade.product$;
 
   protected productId!: number;
 

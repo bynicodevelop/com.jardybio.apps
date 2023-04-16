@@ -25,6 +25,8 @@ export default class ProductsController {
 
     const product = await Product.findOrFail(id)
 
+    await product.load('articles')
+
     return product
   }
 

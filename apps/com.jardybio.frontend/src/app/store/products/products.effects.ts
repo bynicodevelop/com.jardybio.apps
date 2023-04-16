@@ -14,6 +14,7 @@ import {
   deleteProduct,
   deleteProductSuccess,
   getProduct,
+  getProductSuccess,
   loadProducts,
   loadProductsSuccess,
 } from './products.actions';
@@ -46,8 +47,8 @@ export class ProductsEffects {
       switchMap((action) => {
         return this.productService.getProduct(action.id).pipe(
           map((product: Object) =>
-            loadProductsSuccess({
-              products: [product as ProductEntity],
+            getProductSuccess({
+              product: { ...(product as ProductEntity), selected: true },
             })
           )
         );

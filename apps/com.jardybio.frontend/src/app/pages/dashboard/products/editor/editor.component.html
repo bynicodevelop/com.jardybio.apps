@@ -1,3 +1,9 @@
-<p>editor works! {{ productId }}</p>
-
-{{ product$ | async | json }}
+<ul *ngrxLet="product$ as product" class="mt-4">
+  <li
+    *ngFor="let article of product?.articles"
+    class="py-2 border-b border-gray-300"
+  >
+    <h3 class="text-lg font-medium">{{ article.title }}</h3>
+    <p *ngIf="article.content" class="text-gray-500">{{ article.content }}</p>
+  </li>
+</ul>

@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 
 import { IProduct, ProductEntity } from 'packages/interfaces/src/product';
-import { Observable } from 'rxjs';
 
 import { Store } from '@ngrx/store';
 
@@ -11,15 +10,14 @@ import {
   getProduct,
   loadProducts,
 } from './products.actions';
-import { selectAllProducts, selectProductById } from './products.selectors';
+import { selectAllProducts, selectProductSelected } from './products.selectors';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ProductsFacade {
   products$ = this.store.select(selectAllProducts);
-  product$ = (productId: number): Observable<ProductEntity | undefined> =>
-    this.store.select(selectProductById(productId));
+  product$ = this.store.select(selectProductSelected);
 
   constructor(private store: Store) {}
 
