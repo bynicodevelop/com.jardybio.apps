@@ -28,7 +28,15 @@
       "commandPath": "./commands/CreateArticle",
       "commandName": "create:article",
       "description": "",
-      "args": [],
+      "args": [
+        {
+          "type": "string",
+          "propertyName": "id",
+          "name": "id",
+          "required": true,
+          "description": "Id of product"
+        }
+      ],
       "aliases": [],
       "flags": []
     },

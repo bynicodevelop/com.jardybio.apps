@@ -1,8 +1,11 @@
-import { Configuration, OpenAIApi } from 'openai'
+import Product from 'App/Models/Product'
 
-import { BaseCommand } from '@adonisjs/core/build/standalone'
+import { args, BaseCommand } from '@adonisjs/core/build/standalone'
 
 export default class CreateArticle extends BaseCommand {
+  @args.string({ description: 'Id of product' })
+  public id: string
+
   /**
    * Command name is used to run the command
    */
@@ -30,12 +33,13 @@ export default class CreateArticle extends BaseCommand {
   }
 
   public async run(): Promise<void> {
-    const configuration = new Configuration({
-      apiKey: process.env.OPENAI_API_KEY,
-      organization: process.env.OPENAI_ORGANIZATION,
-    })
+    console.log(this.id)
+    // const configuration = new Configuration({
+    //   apiKey: process.env.OPENAI_API_KEY,
+    //   organization: process.env.OPENAI_ORGANIZATION,
+    // })
 
-    const openai = new OpenAIApi(configuration)
+    // const openai = new OpenAIApi(configuration)
 
     // const messages = [
     //   {
@@ -76,6 +80,21 @@ export default class CreateArticle extends BaseCommand {
     //   },
     // ] as Array<ChatCompletionRequestMessage>
 
+    // const messages = [
+    //   {
+    //     role: 'system',
+    //     content: `Tu es un expert en rédaction d'article de blog pour un site E-commerce JardyBio dans le domaine du jardinage qui s'adresse à des lecteurs néophytes.
+    //       Tu recevras la description d'un produit en vente sur le site JardyBio.
+    //       Ton objectif est de donner des titres d'articles qui soient pertinents et qui attirent le lecteur.
+    //       Tu retourneras tes réponses sous la forme d'un tableau JSON de type : "['title 1', 'title 1', '...']"`,
+    //   },
+    //   {
+    //     role: 'user',
+    //     content:
+    //       "Liste des idées d'articles sur : 'Sac de culture de pommes de terre avec rabat et poignée, 7/10 gallons, épais, pour légumes et oignon, Pot de jardin d'extérieur'",
+    //   },
+    // ] as Array<ChatCompletionRequestMessage>
+
     // const response = await openai.createChatCompletion({
     //   model: 'gpt-3.5-turbo',
     //   messages,
@@ -85,21 +104,24 @@ export default class CreateArticle extends BaseCommand {
 
     const data = {
       role: 'assistant',
-      content:
-        '[\n' +
-        '  "Comment faire pousser des pommes de terre facilement avec un sac de culture en 7/10 gallons",\n' +
-        '  "Le sac de culture de pommes de terre : une solution idéale pour les petits espaces",\n' +
-        '  "Découvrez comment utiliser un sac de culture de pommes de terre pour une récolte abondante",\n' +
-        '  "Le jardinage sans jardin : cultivez des pommes de terre sur votre balcon avec le sac de culture",\n' +
-        '  "Le sac de culture de pommes de terre avec rabat et poignée : pratique et résistant",\n' +
-        '  "Les avantages du sac de culture de pommes de terre pour des légumes et des oignons sains",\n' +
-        '  "Comment choisir son sac de culture de pommes de terre en fonction de ses besoins",\n' +
-        '  "Le sac de culture de pommes de terre : une alternative écologique aux pots de jardin traditionnels",\n' +
-        '  "Les astuces à connaître pour réussir sa culture de pommes de terre avec un sac de culture"\n' +
-        ']',
+      content: `[
+          "Cultivez vos propres pommes de terre facilement avec notre sac de culture innovant",
+          "JardyBio : découvrez notre sac de culture de pommes de terre pour un jardinage simplifié",
+          "Jardinage pour débutants : comment utiliser notre sac de culture de pommes de terre pour des récoltes réussies",
+          "Petit espace, grand rendement : optimisez votre balcon avec notre sac de culture pour légumes et oignons",
+          "Récoltez vos légumes sans effort grâce à notre sac de culture de pommes de terre avec rabat",
+          "Comment notre sac de culture de légumes PE peut transformer votre jardinage",
+          "Rendre le jardinage accessible à tous avec notre sac de culture de pommes de terre et légumes"
+        ]`,
     }
 
-    console.log(JSON.parse(data.content))
+    const product = await Product.findOrFail(this.id)
+
+    const articles = await product
+      .related('articles')
+      .createMany(JSON.parse(data.content).map((title: string) => ({ title })))
+
+    console.log(articles)
 
     this.logger.info('Hello world!')
   }

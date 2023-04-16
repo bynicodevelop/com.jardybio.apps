@@ -13,6 +13,7 @@ import {
   createProductSuccess,
   deleteProduct,
   deleteProductSuccess,
+  getProduct,
   loadProducts,
   loadProductsSuccess,
 } from './products.actions';
@@ -32,6 +33,21 @@ export class ProductsEffects {
           map((products: Object) =>
             loadProductsSuccess({
               products: products as ProductEntity[],
+            })
+          )
+        );
+      })
+    )
+  );
+
+  getProduct$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(getProduct),
+      switchMap((action) => {
+        return this.productService.getProduct(action.id).pipe(
+          map((product: Object) =>
+            loadProductsSuccess({
+              products: [product as ProductEntity],
             })
           )
         );

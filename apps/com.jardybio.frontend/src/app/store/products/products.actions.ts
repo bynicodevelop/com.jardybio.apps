@@ -10,6 +10,16 @@ export const loadProductsSuccess = createAction(
   props<{ products: ProductEntity[] }>()
 );
 
+export const getProduct = createAction(
+  '[Products] Get Product',
+  props<{ id: number }>()
+);
+
+export const getProductSuccess = createAction(
+  '[Products] Get Product Success',
+  props<{ product: ProductEntity }>()
+);
+
 export const createProduct = createAction(
   '[Products] Create Product',
   props<{ product: IProduct }>()

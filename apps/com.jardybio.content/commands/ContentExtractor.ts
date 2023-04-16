@@ -25,8 +25,7 @@ export default class ContentExtractor extends BaseCommand {
   /**
    * Command description is displayed in the "help" output
    */
-  public
-  static description = ''
+  public static description = ''
 
   public static settings = {
     /**

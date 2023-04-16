@@ -5,6 +5,8 @@ import { ProductEntity } from '@packages/interfaces';
 import {
   createProduct,
   createProductSuccess,
+  getProduct,
+  getProductSuccess,
   loadProducts,
   loadProductsSuccess,
 } from './products.actions';
@@ -22,6 +24,8 @@ export const initialState: StateProduct = productAdapter.getInitialState();
 export const reducer = createReducer(
   initialState,
   on(loadProducts, (state: StateProduct): StateProduct => state),
+  on(getProduct, (state: StateProduct): StateProduct => state),
+  on(getProductSuccess, (state: StateProduct): StateProduct => state),
   on(
     loadProductsSuccess,
     (state: StateProduct, { products }): StateProduct =>

@@ -14,6 +14,10 @@ export class ProductService {
     return this.http.get('/products');
   }
 
+  getProduct(id: number): Observable<Object> {
+    return this.http.get(`/products/${id}`);
+  }
+
   createProduct(product: IProduct): Observable<Object> {
     return this.http.post('/products', product);
   }

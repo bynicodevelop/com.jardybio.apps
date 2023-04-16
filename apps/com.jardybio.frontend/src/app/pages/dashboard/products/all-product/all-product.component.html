@@ -28,11 +28,12 @@
         >
           <td class="px-4 py-2">{{ product.name }}</td>
           <td class="px-4 py-2 flex justify-end space-x-3">
-            <button
+            <a
               class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-1 px-3 rounded"
+              [routerLink]="[product.id]"
             >
               Voir
-            </button>
+            </a>
             <button
               (click)="deleteProduct(product)"
               class="bg-red-600 hover:bg-red-700 text-white font-semibold py-1 px-3 rounded"
