@@ -6,6 +6,7 @@ import {
   Routes,
 } from '@angular/router';
 
+import { ArticleComponent } from './pages/dashboard/articles/article/article.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { AllProductComponent } from './pages/dashboard/products/all-product/all-product.component';
 import { CreateProductComponent } from './pages/dashboard/products/create-product/create-product.component';
@@ -32,8 +33,12 @@ const routes: Routes = [
         component: CreateProductComponent,
       },
       {
-        path: 'products/:id',
+        path: 'products/:productId',
         component: EditorComponent,
+      },
+      {
+        path: 'products/:productId/article/:id',
+        component: ArticleComponent,
       },
     ],
   },
